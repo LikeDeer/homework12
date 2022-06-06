@@ -376,7 +376,7 @@ int search(int *ht, int key)		// index 를
 	if(ht[index] == key)			// 해쉬 테이블의 위치(해쉬 코드) 에서 키 값을 찾음.
 		return index;				//   그 인덱스를 반환
 
-	while(ht[++index] != key)
+	while(ht[++index] != key)		// 바로 발견하지 못했다면, 해쉬 테이블 생성하는 원리와 동일한 방법으로 탐색
 	{
 		index = index % MAX_HASH_TABLE_SIZE;
 	}
