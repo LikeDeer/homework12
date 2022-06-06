@@ -312,7 +312,7 @@ int quickSort(int *a, int n)		// n : 부분 집합의 크기. 처음에는 전�
 }
 
 int hashCode(int key) {		// key 에 대한 해쉬 코드를 얻는 해쉬 함수(해쉬 테이블의 인덱스)
-   return key % MAX_HASH_TABLE_SIZE;
+   return key % MAX_HASH_TABLE_SIZE;	// 우리 프로그램에서 해쉬 코드 생성 원리는 이와 같다.
 }
 
 int hashing(int *a, int **ht)	// hash table을 생성. 
@@ -338,15 +338,16 @@ int hashing(int *a, int **ht)	// hash table을 생성.
 	int key = -1;
 	int hashcode = -1;
 	int index = -1;
+	// 배열의 key 들을 해쉬 테이블에 저장
 	for (int i = 0; i < MAX_ARRAY_SIZE; i++)
 	{
 		key = a[i];
-		hashcode = hashCode(key);
+		hashcode = hashCode(key);		// key 각각의 해쉬 코드를 얻고
 		/*
 		printf("key = %d, hashcode = %d, hashtable[%d]=%d\n", key, hashcode, hashcode, hashtable[hashcode]);
 		*/
 
-		// 배열의 key 들을 해쉬 테이블에 저장
+		// 해쉬 테이블에서, 얻은 해쉬 코드 위치가 비어있다면 할당
 		if (hashtable[hashcode] == -1)
 		{
 			hashtable[hashcode] = key;
@@ -354,9 +355,9 @@ int hashing(int *a, int **ht)	// hash table을 생성.
 
 			index = hashcode;
 
-			while(hashtable[index] != -1)
+			while(hashtable[index] != -1)	// 이미 차있다면 다른 빈 곳을 찾아서 할당
 			{
-				index = (++index) % MAX_HASH_TABLE_SIZE;
+				index = (++index) % MAX_HASH_TABLE_SIZE;	// 이 논리를 통해.
 				/*
 				printf("index = %d\n", index);
 				*/
